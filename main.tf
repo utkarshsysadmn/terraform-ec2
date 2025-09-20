@@ -135,3 +135,14 @@ resource "aws_iam_instance_profile" "ec2_profile" {
   name = "TerraformEC2Profile"
   role = aws_iam_role.ec2_role.name
 }
+# Create IAM user
+resource "aws_iam_user" "dps_user" {
+  name = "DPS"
+  path = "/"
+}
+
+# Attach AdministratorAccess policy to the user
+resource "aws_iam_user_policy_attachment" "dps_admin_attach" {
+  user       = aws_iam_user.dps_user.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
