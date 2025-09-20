@@ -10,7 +10,7 @@ on:
 
 jobs:
   terraform:
-    name: 'Terraform Plan and Apply'
+    name: Terraform Plan and Apply
     runs-on: ubuntu-latest
 
     env:
@@ -29,18 +29,18 @@ jobs:
         with:
           terraform_version: 1.13.3
 
-      # Step 3: Initialize Terraform
+      # Step 3: Terraform Init
       - name: Terraform Init
-        working-directory: ./terraform-EC2
+        working-directory: ./terraform-ec2   # Make sure folder name matches exactly
         run: terraform init
 
       # Step 4: Terraform Plan
       - name: Terraform Plan
-        working-directory: ./terraform-EC2
+        working-directory: ./terraform-ec2
         run: terraform plan -out=tfplan
 
-      # Step 5: Terraform Apply
+      # Step 5: Terraform Apply (only on main branch)
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'  # Only apply on main branch
-        working-directory: ./terraform-EC2
+        if: github.ref == 'refs/heads/main'
+        working-directory: ./terraform-ec2
         run: terraform apply -auto-approve tfplan
