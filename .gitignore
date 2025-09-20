@@ -1,0 +1,6 @@
+# Ignore Terraform local files and binaries
+terraform.exe
+*.tfstate
+*.tfstate.*
+.terraform/
+*.backup
